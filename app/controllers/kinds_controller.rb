@@ -1,10 +1,9 @@
 class KindsController < ApplicationController
-  before_action :set_kind, only: %i[ show update destroy ]
+  before_action :set_kind, only: [:show, :update, :destroy]
 
   # GET /kinds
   def index
     @kinds = Kind.all
-
     render json: @kinds
   end
 
@@ -45,10 +44,11 @@ class KindsController < ApplicationController
         @kind = Contact.find(params[:contact_id]).kind
         return @kind
       end
+
       @kind = Kind.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # Only allow a trusted parameter "white list" through.
     def kind_params
       params.require(:kind).permit(:description)
     end

@@ -1,16 +1,16 @@
 class ContactsController < ApplicationController
-  before_action :set_contact, only: %i[ show update destroy ]
+  before_action :set_contact, only: [:show, :update, :destroy]
 
   # GET /contacts
   def index
     @contacts = Contact.all
 
-    render json: @contacts  #, methods: :birthdate_br  #, methods: [:hello, :i18n]
+    render json: @contacts #, methods: :birthdate_br #[:hello, :i18n]
   end
 
   # GET /contacts/1
   def show
-    render json: @contact, include: [:kind]#, meta: { author: "Teste"} #, include: [:kind, :phones, :address]
+    render json: @contact, include: [:kind, :address, :phones] #, meta: { author: "Jackson Pires" }   #, include: [:kind, :phones, :address]
   end
 
   # POST /contacts
@@ -18,7 +18,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
 
     if @contact.save
-      render json: @contact, include: [:kind, :phones, :address ], status: :created, location: @contact
+      render json: @contact, include: [:kind, :phones, :address],  status: :created, location: @contact
     else
       render json: @contact.errors, status: :unprocessable_entity
     end
@@ -44,12 +44,13 @@ class ContactsController < ApplicationController
       @contact = Contact.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # Only allow a trusted parameter "white list" through.
     def contact_params
-      params.require(:contact).permit(
-        :name, :email, :birthdate, :kind_id,
-        phones_attributes: [:id, :number, :_destroy],
-        address_attributes: [:id, :street, :city]
-      )
+      # params.require(:contact).permit(
+      #   :name, :email, :birthdate, :kind_id,
+      #   phones_attributes: [:id, :number, :_destroy],
+      #   address_attributes: [:id, :street, :city]
+      # )
+      ActiveModelSerializers::Deserialization.jsonapi_parse(params)
     end
 end
