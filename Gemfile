@@ -15,6 +15,10 @@ gem "sqlite3", "~> 1.4"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
+gem "jwt"
+gem "devise_token_auth"
+gem "devise-i18n"
+gem 'versionist', '~> 1.5.0'
 
 gem 'rails-i18n', '~> 7.0.0' # For 7.0.0
 
