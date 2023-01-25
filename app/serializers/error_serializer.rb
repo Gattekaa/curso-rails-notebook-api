@@ -7,7 +7,7 @@ module ErrorSerializer
                 { id: k, title: msg }
             end
         end.flatten
-        json[:errors] = mew_hash
+        json[:errors] = new_hash
         json
     end
 end
