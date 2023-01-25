@@ -1,4 +1,5 @@
-class PhonesController < ApplicationController
+module V1 
+  class PhonesController < ApplicationController
     before_action :set_phones
   
     # GET /phones/1
@@ -13,3 +14,4 @@ class PhonesController < ApplicationController
       end
   end
   
+end

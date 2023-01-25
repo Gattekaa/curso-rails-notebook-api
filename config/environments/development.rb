@@ -60,6 +60,10 @@ Rails.application.configure do
     port: 3000
   }
 
+  config.hosts << "notebook.local"
+  config.hosts << "v1.notebook.local"
+  config.hosts << "v2.notebook.local"
+
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
