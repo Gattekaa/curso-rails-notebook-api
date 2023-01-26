@@ -20,7 +20,7 @@ gem "devise_token_auth"
 gem "devise-i18n"
 gem 'versionist', '~> 1.5.0'
 gem 'kaminari'
-gem 'rspec-rails', '~> 3.5'
+gem 'rspec-rails', '~> 4.1.0'
 #gem 'api-pagination'
 
 gem 'rails-i18n', '~> 7.0.0' # For 7.0.0
